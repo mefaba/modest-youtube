@@ -1,0 +1,113 @@
+Mehmet Fatih
+create a chrome extension, that only shows search bar of youtube when user enters youtube homepage
+To create a Chrome extension that only shows the search bar on the YouTube homepage, you will need to use the Chrome Extension API. The steps to create this extension are as follows:
+
+Open the Chrome Extension Developer documentation and familiarize yourself with the concepts and the API.
+
+Create a new folder for your extension and create a file called manifest.json in it. This file will contain the metadata for your extension.
+
+In the manifest.json file, specify the name, version, and description of your extension. You will also need to include the permissions for the extension, which in this case would be to access the YouTube homepage.
+
+Next, create a file called background.js in your extension folder. This file will contain the code that runs in the background of the extension and makes the necessary changes to the YouTube homepage.
+
+In the background.js file, you will need to write code that listens for when the user navigates to the YouTube homepage and then makes changes to the page to only show the search bar. You can do this by using the Chrome Extension API to inject a script into the page that modifies the page's HTML to hide all elements except for the search bar.
+
+Finally, you will need to package your extension and install it in Chrome. You can do this by going to the Chrome Extensions page, clicking on the "Developer mode" checkbox, and then clicking on the "Load unpacked extension" button. Select the folder containing your extension files, and the extension should be installed and active in Chrome.
+
+
+
+
+Mehmet Fatih
+write code for background.js
+Here is an example of what the code for background.js could look like:
+
+Copy code
+// Listen for when the user navigates to the YouTube homepage
+chrome.webNavigation.onCompleted.addListener(function(details) {
+  if (details.url === "https://www.youtube.com/") {
+    // Inject a script into the page that modifies the page's HTML
+    chrome.tabs.executeScript({
+      code: `
+        var searchBar = document.querySelector("#search");
+        var elements = document.querySelectorAll("body *");
+        for (var i = 0; i < elements.length; i++) {
+          var element = elements[i];
+          if (element !== searchBar) {
+            element.style.display = "none";
+          }
+        }
+      `
+    });
+  }
+});
+This code listens for when the user navigates to the YouTube homepage and then injects a script into the page that modifies the page's HTML to hide all elements except for the search bar. It does this by using the querySelector and querySelectorAll methods to find the search bar and all other elements on the page, respectively. It then sets the display property of all elements except for the search bar to "none", which hides them from view.
+
+Note that this code is just an example and may not work perfectly in all cases. It is intended to give you an idea of how to approach this problem using the Chrome Extension API. You may need to modify it to fit your specific needs.
+
+
+
+
+Mehmet Fatih
+Thats good, I also want to alight search bar in middle vertically
+To align the search bar in the middle of the page vertically, you can use the style property of the search bar element to set the top property to "50%" and the transform property to "translateY(-50%)". This will cause the search bar to be positioned exactly in the middle of the page vertically.
+
+Here is an example of how you could modify the code from the previous answer to include this additional styling:
+
+Copy code
+// Listen for when the user navigates to the YouTube homepage
+chrome.webNavigation.onCompleted.addListener(function(details) {
+  if (details.url === "https://www.youtube.com/") {
+    // Inject a script into the page that modifies the page's HTML
+    chrome.tabs.executeScript({
+      code: `
+        var searchBar = document.querySelector("#search");
+        searchBar.style.top = "50%";
+        searchBar.style.transform = "translateY(-50%)";
+
+        var elements = document.querySelectorAll("body *");
+        for (var i = 0; i < elements.length; i++) {
+          var element = elements[i];
+          if (element !== searchBar) {
+            element.style.display = "none";
+          }
+        }
+      `
+    });
+  }
+});
+This code will position the search bar in the middle of the page vertically and hide all other elements on the page, so only the search bar will be visible. Note that, as before, this code is just an example and may need to be modified to fit your specific needs.
+
+
+
+
+Mehmet Fatih
+Thats good, I decided to not hide left panel at youtube.
+If you want to not hide the left panel on the YouTube homepage, you can simply modify the code from the previous answer to exclude the left panel from the list of elements that are hidden. You can do this by using the querySelector method to find the left panel element and then excluding it from the list of elements that are hidden.
+
+Here is an example of how you could modify the code to achieve this:
+
+Copy code
+// Listen for when the user navigates to the YouTube homepage
+chrome.webNavigation.onCompleted.addListener(function(details) {
+  if (details.url === "https://www.youtube.com/") {
+    // Inject a script into the page that modifies the page's HTML
+    chrome.tabs.executeScript({
+      code: `
+        var searchBar = document.querySelector("#search");
+        searchBar.style.top = "50%";
+        searchBar.style.transform = "translateY(-50%)";
+
+        var leftPanel = document.querySelector("#left-panel");
+
+        var elements = document.querySelectorAll("body *");
+        for (var i = 0; i < elements.length; i++) {
+          var element = elements[i];
+          if (element !== searchBar && element !== leftPanel) {
+            element.style.display = "none";
+          }
+        }
+      `
+    });
+  }
+});
+This code will position the search bar in the middle of the page vertically, hide all elements on the page except for the search bar and the left panel, and then align the search bar in the middle of the page vertically. Note that, as before, this code is just an example and may need to be modified to fit your specific needs.

@@ -1,0 +1,19 @@
+{
+  "name": "Modest Youtube",
+  "description": "Removes",
+  "version": "1.0",
+  "manifest_version": 3,
+  "permissions": [],
+  "content_scripts": [
+    {
+      "matches": ["https://www.youtube.com/*?"],
+      "css": ["extstyles.css"],
+      "js": ["contentScript.js"]
+    }
+  ],
+  "action": {
+    "default_title": "Minimal Youtube",
+    "default_icon": {}
+  },
+  "icons": {}
+}

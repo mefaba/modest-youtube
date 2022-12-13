@@ -1,4 +1,4 @@
-window.addEventListener("load", () => {
+window.addEventListener("pageshow", () => {
   let home_videos = document.querySelector("#page-manager");
   nodeObserver(home_videos, ModestHome);
 });

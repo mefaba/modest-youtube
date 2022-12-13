@@ -6,14 +6,24 @@
   "permissions": [],
   "content_scripts": [
     {
-      "matches": ["https://www.youtube.com/*?"],
+      "matches": ["https://www.youtube.com/"],
       "css": ["extstyles.css"],
       "js": ["contentScript.js"]
     }
   ],
   "action": {
-    "default_title": "Minimal Youtube",
-    "default_icon": {}
+    "default_title": "Modest Youtube",
+    "default_icon": {
+      "16": "/images_and_icons/icon16.png",
+      "32": "/images_and_icons/icon32.png",
+      "48": "/images_and_icons/icon48.png",
+      "128": "/images_and_icons/icon128.png"
+    }
   },
-  "icons": {}
+  "icons": {
+    "16": "/images_and_icons/icon16.png",
+    "32": "/images_and_icons/icon32.png",
+    "48": "/images_and_icons/icon48.png",
+    "128": "/images_and_icons/icon128.png"
+  }
 }

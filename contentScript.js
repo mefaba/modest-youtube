@@ -1,15 +1,16 @@
 window.addEventListener("pageshow", () => {
-  let home_videos = document.querySelector("#page-manager");
-  nodeObserver(home_videos, ModestHome);
+  let body = document.querySelector("#content");
+  nodeObserver(body, ModestHome);
 });
 
 function ModestHome() {
   let home_videos = document.querySelector("#page-manager");
   if (window.location.origin + "/" == window.location.href) {
-    home_videos.style.visibility = "hidden";
-    let searchEl = document.querySelector("#search");
+    //home_videos.style.visibility = "hidden";
+    home_videos.style.display = "none";
   } else {
-    home_videos.style.visibility = "visible";
+    //home_videos.style.visibility = "visible";
+    home_videos.style.display = "block";
   }
 }
 
